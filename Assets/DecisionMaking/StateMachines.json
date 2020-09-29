@@ -1,0 +1,119 @@
+{
+    "Machines": [{
+            "Name": "Player",
+            "States": [{
+                    "Name": "Calm",
+                    "EntryActions": [{
+                        "Name": "Say",
+                        "Arguments": [
+                            "So calm..."
+                        ]
+                    }],
+                    "Actions": [],
+                    "ExitActions": []
+                },
+                {
+                    "Name": "Alert",
+                    "EntryActions": [{
+                        "Name": "Say",
+                        "Arguments": [
+                            "Cursor is near!"
+                        ]
+                    }],
+                    "Actions": [],
+                    "ExitActions": []
+                }
+            ],
+            "Transitions": [{
+                    "From": "Calm",
+                    "To": "Alert",
+                    "Condition": {
+                        "Negated": false,
+                        "Name": "MouseIsNear",
+                        "Arguments": [
+                            "$",
+                            "2"
+                        ]
+                    }
+                },
+                {
+                    "From": "Alert",
+                    "To": "Calm",
+                    "Condition": {
+                        "Negated": true,
+                        "Name": "MouseIsNear",
+                        "Arguments": [
+                            "$",
+                            "5"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "Name": "Ghost",
+            "States": [{
+                    "Name": "Calm",
+                    "EntryActions": [{
+                        "Name": "Say",
+                        "Arguments": [
+                            "So calm here!"
+                        ]
+                    }],
+                    "Actions": [],
+                    "ExitActions": []
+                },
+                {
+                    "Name": "Alert",
+                    "EntryActions": [{
+                        "Name": "Say",
+                        "Arguments": [
+                            "Get away!"
+                        ]
+                    }],
+                    "Actions": [],
+                    "ExitActions": []
+                }
+            ],
+            "Transitions": [{
+                    "From": "Calm",
+                    "To": "Alert",
+                    "Condition": {
+                        "Negated": false,
+                        "Name": "And",
+                        "Condition1": {
+                            "Negated": false,
+                            "Name": "MouseIsNear",
+                            "Arguments": [
+                                "$",
+                                "1"
+                            ]
+                        },
+                        "Condition2": {
+                            "Negated": false,
+                            "Name": "GameObjectIsNear",
+                            "Arguments": [
+                                "$",
+                                "#Player",
+                                "5"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "From": "Alert",
+                    "To": "Calm",
+                    "Condition": {
+                        "Negated": true,
+                        "Name": "GameObjectIsNear",
+                        "Arguments": [
+                            "$",
+                            "#Player",
+                            "10"
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}
